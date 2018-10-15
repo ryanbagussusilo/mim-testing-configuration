@@ -1,0 +1,52 @@
+spring:
+  profiles: mim-config-service
+  
+endpoints:
+  restart:
+    enabled: true
+
+    
+# -----------------------------------------------
+# REGISTRY SERVICE CONFIGURATION
+# -----------------------------------------------
+---
+spring:
+  profiles: mim-registry-service
+
+info:
+  description: This service is use to handle and manage all app / service / microservice in MIM environment
+
+management:
+  endpoints:
+    info:
+      enabled: true
+    health:
+        enabled: true
+        show-details: true
+    refresh:
+      enabled: true
+    pause:
+      enabled: true
+    restart:
+      enabled: true
+    resume:
+      enabled: true
+    shutdown:
+      enabled: true
+    web:
+      base-path: /admin-srs
+
+eureka:
+  environment: Registry Service Development
+  datacenter: SHHO GTN
+  instance:
+    instance-id: MIM-REGISTRY-SERVICE
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+    status-page-url-path: ${management.endpoints.web.base-path}/info
+    health-check-url-path: ${management.endpoints.web.base-path}/health
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+        defaultZone: http://localhost:4040/eureka
